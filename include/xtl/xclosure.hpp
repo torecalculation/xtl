@@ -37,7 +37,7 @@ namespace xtl
      ****************/
 
     template <class S>
-    struct closure_type
+    struct closure_type_
     {
         using underlying_type = std::conditional_t<std::is_const<std::remove_reference_t<S>>::value,
                                                    const std::decay_t<S>,
@@ -48,10 +48,10 @@ namespace xtl
     };
 
     template <class S>
-    using closure_type_t = typename closure_type<S>::type;
+    using closure_type_t = typename closure_type_<S>::type;
 
     template <class S>
-    struct const_closure_type
+    struct const_closure_type_
     {
         using underlying_type = std::decay_t<S>;
         using type = typename std::conditional<std::is_lvalue_reference<S>::value,
@@ -60,7 +60,7 @@ namespace xtl
     };
 
     template <class S>
-    using const_closure_type_t = typename const_closure_type<S>::type;
+    using const_closure_type_t = typename const_closure_type_<S>::type;
 
     /********************
      * ptr_closure_type *
